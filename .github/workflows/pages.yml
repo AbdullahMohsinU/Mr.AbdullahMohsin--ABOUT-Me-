@@ -1,13 +1,10 @@
+
 name: Deploy portfolio to GitHub Pages
 
 on:
   push:
     branches:
       - main
-    paths:
-      - "Website-Static/**"
-      - ".github/workflows/pages.yml"
-
   workflow_dispatch:
 
 permissions:
@@ -28,17 +25,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure GitHub Pages
+      - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
-      - name: Upload website files
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
           path: Website-Static
 
-      - name: Deploy website
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
